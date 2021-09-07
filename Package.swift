@@ -5,24 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "NetworkImage",
-    products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "NetworkImage",
-            targets: ["NetworkImage"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
+    platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)],
+    products: [.library(name: "NetworkImage", targets: ["NetworkImage"])],
+    dependencies: [.package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.4.3")],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "NetworkImage",
-            dependencies: []),
-        .testTarget(
-            name: "NetworkImageTests",
-            dependencies: ["NetworkImage"]),
-    ]
+        .target(name: "NetworkImage", dependencies: ["Alamofire"]),
+        .testTarget(name: "NetworkImageTests", dependencies: ["NetworkImage"]),
+    ],
+    swiftLanguageVersions: [.v5]
 )
